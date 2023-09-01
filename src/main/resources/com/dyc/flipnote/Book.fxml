@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="Group">
+    <StackPane alignment="BOTTOM_LEFT"
+               style="-fx-border-color: lightgrey; -fx-background-color: white">
+        <HBox fx:id="pageContainer">
+        </HBox>
+        <Group>
+            <TextFlow style="-fx-padding: 0 0 4 5; ">
+                <Label fx:id="currentPageNumberLabel">X</Label>
+                <Label>/</Label>
+                <Label fx:id="totalPageNumberLabel">X</Label>
+            </TextFlow>
+        </Group>
+
+    </StackPane>
+</fx:root>

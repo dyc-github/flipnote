@@ -17,37 +17,23 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import javafx.scene.image.ImageView?>
+<?import com.dyc.flipnote.Book?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.dyc.flipnote.AppController">
     <center>
-        <Group>
-            <StackPane alignment="BOTTOM_LEFT"
-                       style="-fx-border-color: lightgrey; -fx-background-color: white">
-                <HBox fx:id="pageContainer">
-                </HBox>
-                <Group>
-                    <TextFlow style="-fx-padding: 0 0 4 5; ">
-                        <Label fx:id="currentPageLabel">X</Label>
-                        <Label>/</Label>
-                        <Label fx:id="totalPagesLabel">X</Label>
-                    </TextFlow>
-                </Group>
-
-            </StackPane>
-        </Group>
+        <Book fx:id="book"/>
     </center>
 
     <bottom>
         <HBox alignment="CENTER">
-            <ComboBox fx:id="colors">
+            <ComboBox fx:id="tools">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Black"/>
-                        <String fx:value="Red"/>
-                        <String fx:value="Blue"/>
+                        <String fx:value="Brush"/>
+                        <String fx:value="Eraser"/>
                     </FXCollections>
                 </items>
                 <value>
-                    Black
+                    Brush
                 </value>
             </ComboBox>
             <ComboBox fx:id="sizes">
@@ -62,22 +48,25 @@
                     Small
                 </value>
             </ComboBox>
-            <ComboBox fx:id="tools">
+            <ComboBox fx:id="colors">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Brush"/>
-                        <String fx:value="Eraser"/>
+                        <String fx:value="Black"/>
+                        <String fx:value="Red"/>
+                        <String fx:value="Blue"/>
                     </FXCollections>
                 </items>
                 <value>
-                    Brush
+                    Black
                 </value>
             </ComboBox>
 
-            <Button fx:id="previousPageButton">PREV</Button>
+
+            <Button fx:id="previousPageButton" disable="true">PREV</Button>
             <ToggleButton fx:id="togglePlayButton">PLAY/PAUSE</ToggleButton>
-            <Button fx:id="nextPageButton">NEXT</Button>
-            <Button fx:id="newPageButton">NEW PAGE</Button>
+            <Button fx:id="nextPageButton" disable="true" >NEXT</Button>
+            <Button fx:id="addPageButton">NEW PAGE</Button>
+            <Button fx:id="deletePageButton" disable="true">DELETE PAGE</Button>
         </HBox>
     </bottom>
 

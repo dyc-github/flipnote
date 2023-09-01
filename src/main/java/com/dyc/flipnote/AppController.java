@@ -1,88 +1,57 @@
 package com.dyc.flipnote;
 
-import com.dyc.flipnote.components.Page;
-import com.dyc.flipnote.models.Book;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-
-import java.util.ArrayList;
 
 public class AppController {
-    private final Book book;
-    private ArrayList<Page> pages;
-
     @FXML
-    private HBox pageContainer;
+    private Book book;
     @FXML
     private ComboBox<String> colors, sizes, tools;
     @FXML
     private ToggleButton togglePlayButton;
     @FXML
-    private Button newPageButton, previousPageButton, nextPageButton;
-    @FXML
-    private Label currentPageLabel, totalPagesLabel;
-
-    public AppController() {
-        book = new Book();
-        pages = new ArrayList<Page>();
-        pages.add(new Page());
-    }
+    private Button addPageButton, deletePageButton, previousPageButton, nextPageButton;
 
     public void initialize() {
-        //Controller to View
-
-        //Model to View
-        book.totalPageProperty().addListener((observableValue, oldNumber, newNumber) -> {
-            pages.add(new Page());
-            totalPagesLabel.setText(newNumber.toString());
-        });
-        book.currentPageProperty().addListener((observableValue, oldNumber, newNumber) -> {
-            Page page = pages.get(newNumber.intValue() - 1);
-            ObservableList<Node> children = pageContainer.getChildren();
-            children.clear();
-            children.add(page);
-            currentPageLabel.setText(newNumber.toString());
-        });
-        book.currentPageIsFirstProperty().addListener((observableValue, oldBoolean, newBoolean) -> {
-            previousPageButton.setDisable(newBoolean);
-        });
-        book.getCurrentPageIsLastProperty().addListener((observableValue, oldBoolean, newBoolean) -> {
-            nextPageButton.setDisable(newBoolean);
-        });
-        book.initialize();
-
         //Controller to Model
-        newPageButton.setOnAction(actionEvent -> {
-            book.addNewPage();
+        addPageButton.setOnAction(actionEvent -> {
+            book.addPage();
+            updateBookButtons();
+        });
+        deletePageButton.setOnAction(actionEvent -> {
+            book.deletePage();
+            updateBookButtons();
         });
         previousPageButton.setOnAction(actionEvent -> {
             book.previousPage();
+            updateBookButtons();
         });
         nextPageButton.setOnAction(actionEvent -> {
             book.nextPage();
+            updateBookButtons();
         });
         togglePlayButton.setOnAction(actionEvent ->
         {
             if(togglePlayButton.isSelected()){
              book.play();
+                previousPageButton.setDisable(true);
+                nextPageButton.setDisable(true);
              return;
             }
             book.pause();
+            updateBookButtons();
         });
         colors.setOnAction(actionEvent -> {
             System.out.println(actionEvent);
             System.out.println(colors.valueProperty().getValue());
-
         });
     }
 
-    private void updatePageContainer() {
-        int pageIndex = book.getCurrentPage() - 1;
+    private void updateBookButtons(){
+        previousPageButton.setDisable(book.getCurrentPageNumber() <= 1);
+        nextPageButton.setDisable(book.getTotalPageNumber() <= book.getCurrentPageNumber());
+        deletePageButton.setDisable(book.getTotalPageNumber() <= 1);
     }
 
 
