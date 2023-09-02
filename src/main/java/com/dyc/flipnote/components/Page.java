@@ -1,13 +1,10 @@
 package com.dyc.flipnote.components;
 
 import com.dyc.flipnote.Point;
-import com.dyc.flipnote.models.Brush;
-import com.dyc.flipnote.models.Eraser;
 import com.dyc.flipnote.models.Tool;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import java.util.LinkedList;
 import java.util.Queue;

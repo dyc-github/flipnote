@@ -1,7 +1,6 @@
 package com.dyc.flipnote;
 
 import com.dyc.flipnote.components.Page;
-import com.dyc.flipnote.models.Brush;
 import com.dyc.flipnote.models.Tool;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;

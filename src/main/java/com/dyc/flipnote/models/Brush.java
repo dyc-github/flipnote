@@ -1,11 +1,7 @@
 package com.dyc.flipnote.models;
 
-import com.dyc.flipnote.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class Brush extends Tool {
 

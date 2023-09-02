@@ -5,6 +5,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
+
 <fx:root xmlns:fx="http://javafx.com/fxml" type="Group">
     <StackPane alignment="BOTTOM_LEFT"
                style="-fx-border-color: lightgrey; -fx-background-color: white">
