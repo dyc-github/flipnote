@@ -1,6 +1,8 @@
 package com.dyc.flipnote;
 
 import com.dyc.flipnote.components.Page;
+import com.dyc.flipnote.models.Brush;
+import com.dyc.flipnote.models.Tool;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ public class Book extends Group {
     ArrayList<Page> pages;
     private final AnimationTimer timer;
     private int currentPageNumber;
+    private Tool tool;
 
     @FXML
     private HBox pageContainer;
@@ -58,6 +61,14 @@ public class Book extends Group {
         addPage();
     }
 
+    public void setTool(Tool tool) {
+        this.tool = tool;
+        getCurrentPage().setTool(tool);
+    }
+    public Tool getTool(){
+        return tool;
+    }
+
     public void play() {
         timer.start();
     }
@@ -66,11 +77,16 @@ public class Book extends Group {
         timer.stop();
     }
 
+
+    private Page getCurrentPage(){
+        return pages.get(currentPageNumber - 1);
+    }
     private void setCurrentPage(int pageNumber) {
         if (0 >= pageNumber || pageNumber > getTotalPageNumber()) {
             throw new IndexOutOfBoundsException("Cannot set page");
         }
         currentPageNumber = pageNumber;
+        getCurrentPage().setTool(tool);
         updateUI();
     }
 
@@ -90,8 +106,10 @@ public class Book extends Group {
             return;
         }
         setCurrentPage(currentPageNumber);
+    }
 
-
+    public void clearPage(){
+        getCurrentPage().clear();
     }
 
     public int getCurrentPageNumber() {
@@ -116,10 +134,9 @@ public class Book extends Group {
         setCurrentPage(currentPageNumber + 1);
     }
 
-
     private void updateUI() {
         pageContainer.getChildren().clear();
-        pageContainer.getChildren().add(pages.get(currentPageNumber - 1));
+        pageContainer.getChildren().add(getCurrentPage());
         currentPageNumberLabel.setText(Integer.toString(currentPageNumber));
         totalPageNumberLabel.setText(Integer.toString(getTotalPageNumber()));
     }
